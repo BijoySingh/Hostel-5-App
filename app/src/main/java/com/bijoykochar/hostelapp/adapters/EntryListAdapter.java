@@ -40,7 +40,6 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryViewHolder> {
         holder.title.setText(data.title);
         holder.description.setText(data.description);
         holder.heading.setText(data.heading);
-        holder.add_timestamp.setText(data.add_timestamp);
 
     }
 
