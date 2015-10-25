@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Hostel 5 IITB</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="tabs">
+        <item>Home</item>
+        <item>Menu</item>
+        <item>News</item>
+        <item>Alumni</item>
+        <item>Sports</item>
+        <item>Mess</item>
+        <item>Cult</item>
+        <item>Tech</item>
+        <item>Maint</item>
+        <item>Gallery</item>
+    </string-array>
+
+    <string name="created_by">Created By</string>
+    <string name="bijoy_singh">Bijoy Singh Kochar</string>
+</resources>

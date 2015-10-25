@@ -1,0 +1,20 @@
+<resources>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="tiny_padding">2dp</dimen>
+    <dimen name="small_padding">4dp</dimen>
+    <dimen name="default_padding">8dp</dimen>
+    <dimen name="big_padding">12dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
+    <dimen name="huge_padding">20dp</dimen>
+    <dimen name="massive_padding">24dp</dimen>
+
+    <dimen name="mess_day">21sp</dimen>
+    <dimen name="mess_title">16sp</dimen>
+    <dimen name="mess_food">14sp</dimen>
+
+    <dimen name="author_name">16sp</dimen>
+    <dimen name="author_details">14sp</dimen>
+
+    <dimen name="created_by">14sp</dimen>
+    <dimen name="bijoy_singh_kochar">24sp</dimen>
+</resources>
