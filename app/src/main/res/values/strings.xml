@@ -14,8 +14,14 @@
         <item>Tech</item>
         <item>Maint</item>
         <item>Gallery</item>
+        <item>Notices</item>
     </string-array>
 
     <string name="created_by">Created By</string>
     <string name="bijoy_singh">Bijoy Singh Kochar</string>
+
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="welcome">Welcome</string>
+
 </resources>

@@ -9,4 +9,5 @@ public class Type {
     public static final Integer NEWS = 1;
     public static final Integer ENTRY = 2;
     public static final Integer GALLERY = 3;
+    public static final Integer NOTICE = 4;
 }

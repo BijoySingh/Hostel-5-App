@@ -1,5 +1,7 @@
 package com.bijoykochar.hostelapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,12 +9,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.bijoykochar.hostelapp.fragments.EntryFragment;
 import com.bijoykochar.hostelapp.fragments.GalleryFragment;
 import com.bijoykochar.hostelapp.fragments.MessFragment;
 import com.bijoykochar.hostelapp.fragments.NewsFragment;
+import com.bijoykochar.hostelapp.fragments.NoticeFragment;
 import com.bijoykochar.hostelapp.server.Configurations;
+import com.bijoykochar.hostelapp.server.SsoHelper;
+import com.bijoykochar.hostelapp.utils.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +31,14 @@ import it.neokree.materialtabs.MaterialTabListener;
 
 public class MainActivity extends AppCompatActivity {
 
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
+
         initToolbar();
         initViewPagerAndTabs();
     }
@@ -51,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter.addFragment(new MessFragment(), pageTitles[1]);
         pagerAdapter.addFragment(new NewsFragment(), pageTitles[2]);
         pagerAdapter.addFragment(new GalleryFragment(), pageTitles[9]);
+
+        if (Preferences.getInstance(context).isLoggedIn()) {
+            pagerAdapter.addFragment(new NoticeFragment(), pageTitles[10]);
+        }
+
         pagerAdapter.addFragment(EntryFragment.getInstance(1), pageTitles[3]);
         pagerAdapter.addFragment(EntryFragment.getInstance(2), pageTitles[4]);
         pagerAdapter.addFragment(EntryFragment.getInstance(4), pageTitles[6]);
@@ -119,6 +136,37 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return fragmentTitleList.get(position);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        if (!Preferences.getInstance(context).isLoggedIn()) {
+            inflater.inflate(R.menu.menu_login, menu);
+        } else {
+            inflater.inflate(R.menu.menu_logout, menu);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_login:
+                SsoHelper.openUrl(this);
+                finish();
+                return true;
+            case R.id.action_logout:
+                SsoHelper.logout(this);
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

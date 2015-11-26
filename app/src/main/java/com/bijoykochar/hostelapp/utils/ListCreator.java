@@ -9,6 +9,7 @@ import com.bijoykochar.hostelapp.items.EntryItem;
 import com.bijoykochar.hostelapp.items.GalleryItem;
 import com.bijoykochar.hostelapp.items.MenuItem;
 import com.bijoykochar.hostelapp.items.NewsItem;
+import com.bijoykochar.hostelapp.items.NoticesItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +44,20 @@ public class ListCreator {
 
         return list;
     }
+
+    public List<NoticesItem> createNoticesList(String response) throws JSONException {
+        JSONObject json = new JSONObject(response);
+        JSONArray array = json.getJSONArray(RESULTS);
+        List<NoticesItem> list = new ArrayList<>();
+
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject object = array.getJSONObject(i);
+            list.add(new NoticesItem(object));
+        }
+
+        return list;
+    }
+
 
     public List<MenuItem> createMenuList(String response) throws JSONException {
         JSONObject json = new JSONObject(response);

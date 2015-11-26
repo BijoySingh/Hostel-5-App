@@ -13,9 +13,13 @@ import com.bijoykochar.hostelapp.fragments.RefreshBasedFragment;
 import com.bijoykochar.hostelapp.items.AccessItem;
 import com.bijoykochar.hostelapp.utils.Functions;
 import com.bijoykochar.hostelapp.utils.ListCreator;
+import com.bijoykochar.hostelapp.utils.Preferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The network call handler
@@ -56,6 +60,37 @@ public class Access {
         Volley.newRequestQueue(context).add(jsonRequest);
     }
 
+    public void getDataFromAuthApi(final AccessItem access,final RefreshBasedFragment fragment) {
+        Preferences preferences = Preferences.getInstance(context);
+
+        if (!preferences.isLoggedIn()) {
+            return;
+        }
+
+        JsonObjectRequest jsonRequest = new JsonObjectRequest
+                (Request.Method.POST, access.url, authenticationData(), new Response
+                        .Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonResponse) {
+                        String response = jsonResponse.toString();
+                        Log.d(Access.class.getSimpleName(), response);
+                        fragment.stopRefreshIndicator();
+                        if (!isError(response)) {
+                            Functions.offlineDataWriter(context, access.filename, response);
+                        }
+                        fragment.refreshFileList();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        fragment.stopRefreshIndicator();
+                        error.printStackTrace();
+                    }
+                });
+
+        Volley.newRequestQueue(context).add(jsonRequest);
+    }
+
     public Boolean isError(String response) {
         try {
             JSONObject json = new JSONObject(response);
@@ -64,5 +99,17 @@ public class Access {
             Log.e(Access.class.getSimpleName(), e.getMessage(), e);
             return true;
         }
+    }
+
+    public JSONObject authenticationData() {
+        Preferences preferences = Preferences.getInstance(context);
+
+        String rollNo = preferences.getRollNumber();
+        String token = preferences.getToken();
+        Map<String, String> authenticationMap = new HashMap<>();
+        authenticationMap.put("rollno", rollNo);
+        authenticationMap.put("token", token);
+
+        return new JSONObject(authenticationMap);
     }
 }
