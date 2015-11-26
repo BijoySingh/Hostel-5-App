@@ -17,7 +17,7 @@ public class NoticesViewHolder extends RecyclerView.ViewHolder {
     public TextView description;
     public TextView add_timestamp;
     public TextView file;
-    public LinearLayout user_item;  
+    public LinearLayout user_item;
 
     public NoticesViewHolder(final View root) {
         super(root);

@@ -41,5 +41,12 @@
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/bijoy_singh_kochar"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/html5_icon"
+            android:textColor="@color/white"
+            android:textSize="@dimen/html5_icon"/>
     </LinearLayout>
 </FrameLayout>

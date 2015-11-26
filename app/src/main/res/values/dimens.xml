@@ -17,4 +17,5 @@
 
     <dimen name="created_by">14sp</dimen>
     <dimen name="bijoy_singh_kochar">24sp</dimen>
+    <dimen name="html5_icon">12sp</dimen>
 </resources>
