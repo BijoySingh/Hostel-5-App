@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="true"
     >
 
     <LinearLayout
@@ -19,8 +19,8 @@
             android:id="@+id/day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary_text"
             android:paddingBottom="@dimen/default_padding"
+            android:textColor="@color/primary_text"
             android:textSize="@dimen/mess_day"/>
 
         <LinearLayout

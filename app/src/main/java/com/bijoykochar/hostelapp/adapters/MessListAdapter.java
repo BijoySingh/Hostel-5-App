@@ -1,6 +1,7 @@
 package com.bijoykochar.hostelapp.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import com.bijoykochar.hostelapp.R;
 import com.bijoykochar.hostelapp.fragments.RefreshBasedFragment;
 import com.bijoykochar.hostelapp.items.MenuItem;
+import com.bijoykochar.hostelapp.utils.DayUtil;
 import com.bijoykochar.hostelapp.views.MenuViewHolder;
 
 /**
@@ -35,9 +37,9 @@ public class MessListAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     @Override
     public void onBindViewHolder(MenuViewHolder holder, final int position) {
-
         final MenuItem data = fragment.getValues().get(position);
         holder.day.setText(data.day);
+
         holder.breakfast.foodType.setText("Breakfast");
         holder.lunch.foodType.setText("Lunch");
         holder.tiffin.foodType.setText("Tiffin");

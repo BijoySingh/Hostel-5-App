@@ -13,8 +13,12 @@ import com.bijoykochar.hostelapp.items.MenuItem;
 import com.bijoykochar.hostelapp.items.Type;
 import com.bijoykochar.hostelapp.server.Access;
 import com.bijoykochar.hostelapp.server.Api;
+import com.bijoykochar.hostelapp.utils.DayUtil;
 import com.bijoykochar.hostelapp.utils.Functions;
 import com.bijoykochar.hostelapp.utils.ListCreator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bijoy on 10/24/15.
@@ -61,6 +65,24 @@ public class MessFragment extends RefreshBasedFragment<MenuItem> {
                 Log.e(RefreshBasedFragment.class.getSimpleName(), e.getMessage(), e);
             }
         }
+
+        MenuItem today = DayUtil.getTodaysMenuItem(values);
+        if (today != null) {
+            List<MenuItem> filteredValues = new ArrayList<>();
+            List<MenuItem> reorderedValues = new ArrayList<>();
+
+            reorderedValues.addAll(values);
+            for (MenuItem item : values) {
+                if (item.id.equals(today.id)) {
+                    reorderedValues.addAll(filteredValues);
+                } else {
+                    MenuItem topItem = reorderedValues.remove(0);
+                    filteredValues.add(topItem);
+                }
+            }
+            values = reorderedValues;
+        }
+
     }
 
     @Override

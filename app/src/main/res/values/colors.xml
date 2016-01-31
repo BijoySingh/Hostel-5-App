@@ -20,4 +20,6 @@
     <color name="primary_color">#3F51B5</color>
     <color name="primary_dark_color">#303F9F</color>
     <color name="accent_color">#F50057</color>
+
+    <color name="accent_background">#99283593</color>
 </resources>
